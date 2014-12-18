@@ -21,6 +21,7 @@ var user_constraints = {
     }
 };
 
+// just like in client.js
 var user_validate = schema(user_constraints);
 
 // middleware
@@ -30,8 +31,8 @@ app.use(body.urlencoded({ extended: true }));
 // routes
 app.get('/', user_index);
 app.post('/', user_submit);
-app.use('/assets', express.static('assets'));
-app.use('/public', express.static('bower_components'));
+app.use('/build', express.static('build'));
+app.use('/public', express.static('components'));
 
 // config
 app.set('views', __dirname);
@@ -58,9 +59,12 @@ function user_index(req, res) {
 }
 
 function user_submit(req, res) {
+    var errors = user_validate.validate(req.body);
+
     res.json({
+        valid: !errors || !errors.length,
+        errors: errors,
         data: req.body,
-        constraints: user_constraints,
-        valid: user_validate.validate(req.body)
+        constraints: user_constraints
     });
 }

@@ -1,0 +1,9 @@
+{
+    "dependencies": {
+        "eivindfjeldstad/validate": "*",
+        "lodash/lodash": "*"
+    },
+    "scripts": [
+        "client.js"
+    ]
+}
