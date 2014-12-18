@@ -1,9 +1,9 @@
 build: install
-	component build
+	./node_modules/.bin/component build
 
 install:
 	npm install
-	component install
+	./node_modules/.bin/component install
 
 reset:
 	[ -d node_modules ] && rm -rf node_modules
