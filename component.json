@@ -4,6 +4,7 @@
         "lodash/lodash": "*"
     },
     "scripts": [
-        "client.js"
+        "client.js",
+        "constraints.js"
     ]
 }

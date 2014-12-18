@@ -6,23 +6,8 @@ var express = require('express'),
     swig = require('swig'),
     app = express();
 
-var user_constraints = {
-    first_name: {
-        type: 'string',
-        required: true
-    },
-    last_name: {
-        type: 'string',
-        required: true
-    },
-    age: {
-        type: 'string',
-        required: true
-    }
-};
-
-// just like in client.js
-var user_validate = schema(user_constraints);
+var constraints = require('./constraints'),
+    user_validate = schema(constraints);
 
 // middleware
 app.use(body.json());
@@ -49,7 +34,7 @@ app.listen(process.env.PORT || 5000);
 // handlers
 function user_index(req, res) {
     res.render('index', {
-        constraints: user_constraints,
+        constraints: constraints,
         model: {
             first_name: 'Marcos',
             last_name: 'Minond',
@@ -65,6 +50,6 @@ function user_submit(req, res) {
         valid: !errors || !errors.length,
         errors: errors,
         data: req.body,
-        constraints: user_constraints
+        constraints: constraints
     });
 }

@@ -3,8 +3,8 @@
 var schema = require('validate'),
     lodash = require('lodash');
 
-// just like in server.js
-var user_validate = schema(CONSTRAINTS);
+var constraints = require('./constraints'),
+    user_validate = schema(constraints);
 
 $(function () {
     var $user = $('#user');

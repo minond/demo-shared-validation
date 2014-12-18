@@ -23,42 +23,27 @@ install it using `component` (see `component.json`).
 
 ```js
 // in server.js *and* client.js
-var schema = require('validate');
+var schema = require('validate'),
+    validator = schema({
+        first_name: {
+            type: 'string',
+            required: true
+        }
+    });
 ```
 
 #### build
 
 you will have to build your client code if you end up using a CommonJS module.
 `component` can also take care of that (or `browserify`, but it won't work with
-`validate` because of who the author of `validate` is loading some of its
-dependencies). run `component build` and it will compile all of the scripts you
-have listed in your `scripts` entry in the `component.json` file. this will
+`validate` because of the way the author of `validate` is loading some of his
+dependencies). run `component build` and this will compile all of the scripts
+you have listed in your `scripts` entry in the `component.json` file. this will
 generate a `build/build.js` file that can be included in your browser.
 
-#### constraints
+#### schema/constraints
 
 constraint definitions can be defined in one place and loaded in your server
 and sent down to your client. in this example I am defining the constraings in
-`server.js` (`user_constraints` variable) which I use when generating the
-schema used in node and also make available in my views when they're compiled
-(see `user_index` in `server.js`). these client constraints are saved to a
-global variable like so:
-
-```html
-<script> window.CONSTRAINTS = {{constraints | safe}}; </script>
-```
-
-since they're in a global your client code can now create validation functions
-like this:
-
-```js
-var user_validate = schema(CONSTRAINTS);
-```
-
-#### caveat
-
-if your constraints include funcitons and/or regular expressions (or anything
-that's not a plain object, array, or any scalar), you won't be able to
-stringify them and merge them into your views. you can either inject them into
-your view as plain javascript, or build them using `component` or `browserify`
-and include it in your client code that way.
+`constraints.js` which I require in node and include in the build for my client
+code.
