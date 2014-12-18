@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>shared validation code demo</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/public/normalize.css/normalize.css">
+        <style type="text/css">
+        body {
+            cursor: default;
+            font-family: monospace;
+            padding: 10px;
+        }
+
+        input[type="text"] {
+            margin-bottom: 4px;
+        }
+
+        pre {
+            font-size: 12px;
+        }
+        </style>
+    </head>
+    <body>
+<pre>
+this is the validation that's used for the model on the server and the form on
+the client:
+
+<code class="javascript">{{constraints | json(4)}}</code>
+
+the names/ids on the form are thas as the properties on a model. this is what
+a `User` model looks like in javascript:
+
+<code class="javascript">{{model | json(4)}}</code>
+
+and this is what it looks like in a "form" or "html" format:
+<form method="POST" id="user">
+<input value="{{model.first_name}}" type="text" placeholder="First Name" name="first_name" />
+<input value="{{model.last_name}}" type="text" placeholder="Last Name" id="last_name" name="last_name" />
+<input value="{{model.age}}" type="text" placeholder="Age" id="age" name="age" />
+
+
+you have a few option:
+
+  * this button runs the validation and alerts the output: <input type="button" value="validate" />
+
+  * this one runs the validation and submits the request to the
+    server: <input type="submit" value="submit" />
+
+  * and this one just send the data to the server with no client
+    side validation: <input type="button" value="Bypass Validation" />
+</pre>
+</form>
+        <script src="/public/angular/angular.min.js"></script>
+        <script src="/public/validate/validate.min.js"></script>
+    </body>
+</html>

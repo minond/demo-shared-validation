@@ -1,0 +1,8 @@
+{
+  "name": "demo-shared-validation",
+  "dependencies": {
+    "angular": "~1.3.7",
+    "validate": "~0.3.2",
+    "normalize.css": "~3.0.2"
+  }
+}
