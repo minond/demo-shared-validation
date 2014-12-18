@@ -45,7 +45,7 @@ schema used in node and also make available in my views when they're compiled
 global variable like so:
 
 ```html
-<script>window.CONSTRAINTS = {{constraints | safe}}; </script>
+<script> window.CONSTRAINTS = {{constraints | safe}}; </script>
 ```
 
 since they're in a global your client code can now create validation functions
